@@ -3,7 +3,7 @@
       Kelola Produk
    </x-slot>
 
-   <section class="flex" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000" data-aos-delay="500">
+   <section class="flex" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="300">
 
       <div class="bg-whitebg flex-1 p-4 text-black">
          <div class="container mx-auto py-8">
@@ -21,8 +21,8 @@
 
             <div class="flex flex-col gap-y-4 flex-shrink-0 w-full">
                @foreach ($products as $product)
-                  <div class="bg-beige rounded-lg flex flex-row gap-x-16 p-4">
-                     <div class="min-w-32">
+                  <div class="bg-beige rounded-lg flex flex-row gap-x-12 lg:gap-x-16 p-4">
+                     <div class="min-w-32 item-center">
                         <img src="{{ url($product->image) }}" alt="{{ $product->name }}"
                            class="w-32 h-32 object-cover rounded">
                      </div>
@@ -41,7 +41,7 @@
                            class="bg-lightorange hover:bg-lightorangehv text-white font-bold py-1 px-2 rounded deleteProductBtn"
                            data-id="{{ $product->id }}">Hapus Produk</button>
                      </div>
-                     <div class="space-y-4">
+                     <div class="space-y-4 hidden lg:block">
                         <p>{{ Str::limit($product->description, 220, '...') }}</p>
                         <p class="text-xl font-bold">Rp. {{ number_format($product->price) }}</p>
                         <div class="overflow-y-auto h-56 w-80 rounded-lg bg-softbrown">
