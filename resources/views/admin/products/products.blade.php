@@ -3,12 +3,12 @@
          Kelola Produk
       </x-slot>
 
-      <section class="flex" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="300">
+      <section class="flex md:container md:mx-auto py-8 lg:px-16" data-aos="fade-in" data-aos-easing="linear"
+         data-aos-duration="500" data-aos-delay="300">
 
          <div class="bg-whitebg flex-1 p-4 text-black">
             <div class="container mx-auto py-8">
                <h2 class="text-2xl font-bold mb-4">Kelola Produk</h2>
-
 
                <div class="flex flex-col sm:flex-row justify-between mb-4">
                   <button class="bg-orange hover:bg-orangehv text-white font-bold py-2 px-4 rounded lg:mb-0 mb-2"
@@ -34,15 +34,9 @@
                </div>
 
                <div id="productTableContainer" class="flex flex-col gap-y-4 flex-shrink-0 w-full">
-                  @include('admin.products.partials.product_table', [
-                      'products' => $products,
-                      'productVariants' => $productVariants,
-                  ])
+                  @include('admin.products.partials.product_table', compact('products', 'productVariants'))
                </div>
-
-               <div id="productPaginationLinks" class="flex justify-center mt-8">
-                  {{ $products->links() }}
-               </div>
+               @include('admin.products.partials.pagination', compact('products'))
             </div>
          </div>
 

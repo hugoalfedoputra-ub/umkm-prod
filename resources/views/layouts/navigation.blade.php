@@ -6,9 +6,15 @@
          <div class="flex">
             <!-- Logo -->
             <div class="shrink-0 flex items-center" style="width: 90px;">
-               <a href="{{ route('home') }}">
-                  <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-               </a>
+               @if (Auth::check() && Auth::user()->userrole != 'admin')
+                  <a href="{{ route('home') }}">
+                     <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                  </a>
+               @else
+                  <a href="{{ route('admin.dashboard') }}">
+                     <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                  </a>
+               @endif
             </div>
 
             <!-- Navigation Links -->
@@ -133,19 +139,21 @@
                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                class="absolute right-0 mt-4 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 mr-10"
                style="margin-top: 120px;">
-               <form action="{{ route('filter') }}" method="GET" class="relative">
-                  <div class="relative">
-                     <input type="text" name="query" id="search"
-                        class="w-full border-0 rounded bg-gray-50 pl-4 pr-10 py-3 text-sm leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500"
-                        placeholder="Search..." oninput="this.form.sub.disabled = !this.value.trim();">
-                     <!-- Arrow Button -->
-                     <button type="submit" name="sub"
-                        class="absolute inset-y-0 right-0 flex items-center rounded-r-md bg-gray-200 hover:bg-gray-300 transition-colors duration-300"
-                        disabled>
-                        <span class="px-2 text-gray-700">→</span>
-                     </button>
-                  </div>
-               </form>
+               @if (Auth::check() && Auth::user()->userrole != 'admin')
+                  <form action="{{ route('filter') }}" method="GET" class="relative">
+                     <div class="relative">
+                        <input type="text" name="query" id="search"
+                           class="w-full border-0 rounded bg-gray-50 pl-4 pr-10 py-3 text-sm leading-5 text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500"
+                           placeholder="Search..." oninput="this.form.sub.disabled = !this.value.trim();">
+                        <!-- Arrow Button -->
+                        <button type="submit" name="sub"
+                           class="absolute inset-y-0 right-0 flex items-center rounded-r-md bg-gray-200 hover:bg-gray-300 transition-colors duration-300"
+                           disabled>
+                           <span class="px-2 text-gray-700">→</span>
+                        </button>
+                     </div>
+                  </form>
+               @endif
                <!-- Search Results Container -->
                <div id="search-results"
                   class="absolute w-full bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-50 hidden text-black max-h-72 overflow-y-auto">

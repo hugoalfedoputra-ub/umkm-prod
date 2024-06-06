@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
@@ -87,7 +88,6 @@ class AdminController extends Controller
             }
         }
 
-        // Reverse arrays for correct chronological order
         $months = array_reverse($months);
         foreach ($chartData as $key => $data) {
             $chartData[$key] = array_reverse($data);
@@ -146,6 +146,12 @@ class AdminController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
+    public function products_v2()
+    {
+        $products = Product::paginate(5);
+        $productVariants = ProductVariant::all();
+        return view('admin.products.products', compact('products', 'productVariants'));
+    }
     public function productTable(Request $request)
     {
         $query = Product::query();
@@ -167,18 +173,17 @@ class AdminController extends Controller
         $products = $query->paginate(5);
         $productVariants = ProductVariant::all();
 
-        $tableView = view('admin.products.partials.product_table', compact('products', 'productVariants'))->render();
-        $paginationView = view('admin.products.partials.pagination', compact('products'))->render();
+        if ($request->ajax()) {
+            $tableView = view('admin.products.partials.product_table', compact('products', 'productVariants'))->render();
+            $paginationView = view('admin.products.partials.pagination', compact('products'))->render();
 
-        return response()->json(['table' => $tableView, 'pagination' => $paginationView]);
-    }
+            return response()->json(['table' => $tableView, 'pagination' => $paginationView]);
+        }
 
-    public function products_v2()
-    {
-        $products = Product::paginate(5);
-        $productVariants = ProductVariant::all();
         return view('admin.products.products', compact('products', 'productVariants'));
     }
+
+
 
     public function storeProduct(Request $request)
     {
@@ -440,11 +445,15 @@ class AdminController extends Controller
 
         $users = $query->paginate(10);
 
-        $tableView = view('admin.users.partials.user_table', compact('users'))->render();
-        $mobileView = view('admin.users.partials.mobile_user_table', compact('users'))->render();
-        $paginationView = view('admin.users.partials.pagination', compact('users'))->render();
+        if ($request->ajax()) {
+            $tableView = view('admin.users.partials.user_table', compact('users'))->render();
+            $mobileView = view('admin.users.partials.mobile_user_table', compact('users'))->render();
+            $paginationView = view('admin.users.partials.pagination', compact('users'))->render();
 
-        return response()->json(['table' => $tableView, 'mobile' => $mobileView, 'pagination' => $paginationView]);
+            return response()->json(['table' => $tableView, 'mobile' => $mobileView, 'pagination' => $paginationView]);
+        }
+
+        return view('admin.users.index', compact('users'));
     }
 
     public function createUser()

@@ -18,6 +18,7 @@ $(document).ready(function () {
                 $("#userTableBody").html(data.table);
                 $("#mobileUserTable").html(data.mobile);
                 $("#userPaginationLinks").html(data.pagination);
+                $("html, body").animate({ scrollTop: 0 }, "fast");
             },
             error: function (error) {
                 console.log(error);
@@ -26,7 +27,9 @@ $(document).ready(function () {
     }
 
     // Call loadUserData on page load
-    loadUserData();
+    if (window.location.pathname === "/admin/users") {
+        loadUserData();
+    }
 
     // Handle pagination click
     $(document).on("click", "#userPaginationLinks a", function (e) {

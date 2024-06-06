@@ -1,3 +1,3 @@
 <div id="userPaginationLinks" class="flex justify-center">
-   {{ $users->links() }}
+   {{ $users->appends(request()->query())->links() }}
 </div>

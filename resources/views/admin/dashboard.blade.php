@@ -6,7 +6,11 @@
    <section class="bg-whitebg dashboard-ad md:container md:mx-auto py-8 lg:px-16" data-aos="fade-in"
       data-aos-easing="linear" data-aos-duration="600" data-aos-delay="500">
 
+<<<<<<< Updated upstream
       <!-- The Sidebar Layout -->
+=======
+      <!-- Sidebar -->
+>>>>>>> Stashed changes
       {{-- @include('layouts.sidebar') --}}
 
       <!-- Main Content -->
@@ -94,7 +98,7 @@
                </div>
             </form>
 
-            {{-- Cards untuk recent Order --}}
+            {{-- cards untuk recent Order --}}
             <div class="flex flex-wrap -mx-2">
                @foreach ($recentOrders as $order)
                   <div class="w-full md:w-1/2 px-2 mb-4">

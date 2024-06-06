@@ -18,6 +18,7 @@ $(document).ready(function () {
                 console.log(data); // Tambahkan log ini untuk debugging
                 $("#productTableContainer").html(data.table);
                 $("#productPaginationLinks").html(data.pagination);
+                $("html, body").animate({ scrollTop: 0 }, "fast");
             },
             error: function (error) {
                 console.log(error);
