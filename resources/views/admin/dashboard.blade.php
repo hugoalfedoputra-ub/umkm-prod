@@ -94,7 +94,7 @@
                </div>
             </form>
 
-            {{-- cards untuk recent Order --}}
+            {{-- cards-cards untuk recent Order --}}
             <div class="flex flex-wrap -mx-2">
                @foreach ($recentOrders as $order)
                   <div class="w-full md:w-1/2 px-2 mb-4">
