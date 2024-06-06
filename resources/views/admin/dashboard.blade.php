@@ -4,7 +4,7 @@
    </x-slot>
 
    <section class="bg-whitebg dashboard-ad md:container md:mx-auto py-8 lg:px-16" data-aos="fade-in"
-      data-aos-easing="linear" data-aos-duration="500" data-aos-delay="500">
+      data-aos-easing="linear" data-aos-duration="600" data-aos-delay="500">
 
       <!-- Sidebar -->
       {{-- @include('layouts.sidebar') --}}
@@ -33,7 +33,7 @@
             {{-- Dropdown untuk memilih data chart --}}
             <form action="{{ route('admin.dashboard') }}" method="GET">
                <div class="flex flex-row gap-4 flex-shrink-0 mb-4 flex-wrap items-center">
-                  <select name="chart_type" class="bg-beige text-black p-2 rounded-lg w-44">
+                  <select name="chart_type" class="bg-brown text-white p-2 rounded-lg w-44">
                      <option value="status" {{ request('chart_type') == 'status' ? 'selected' : '' }}>Status Pesanan
                      </option>
                      <option value="sales" {{ request('chart_type') == 'sales' ? 'selected' : '' }}>Produk Terjual
