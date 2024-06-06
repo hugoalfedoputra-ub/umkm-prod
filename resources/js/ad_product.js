@@ -27,7 +27,9 @@ $(document).ready(function () {
     }
 
     // Call loadProductData on page load
-    loadProductData();
+    if (window.location.pathname === "/admin/products/v2") {
+        loadProductData();
+    }
 
     // Handle pagination click
     $(document).on("click", "#productPaginationLinks a", function (e) {
