@@ -3,7 +3,7 @@ $(document).ready(function () {
     function loadUserData(
         url = "/admin/users/table",
         search = "",
-        sortBy = "name",
+        sortBy = "id",
         sortOrder = "asc"
     ) {
         $.ajax({
@@ -15,13 +15,11 @@ $(document).ready(function () {
                 sort_order: sortOrder,
             },
             success: function (data) {
-                console.log(data); // Tambahkan log ini untuk debugging
                 $("#userTableBody").html(data.table);
                 $("#mobileUserTable").html(data.mobile);
-                $("#paginationLinks").html(data.pagination);
+                $("#userPaginationLinks").html(data.pagination);
             },
             error: function (error) {
-                alert("Gagal memuat data pengguna");
                 console.log(error);
             },
         });
@@ -31,11 +29,11 @@ $(document).ready(function () {
     loadUserData();
 
     // Handle pagination click
-    $(document).on("click", "#paginationLinks a", function (e) {
+    $(document).on("click", "#userPaginationLinks a", function (e) {
         e.preventDefault();
         let url = $(this).attr("href");
         let search = $("#userSearchInput").val() || "";
-        let sortBy = $("#userSortBy").val() || "name";
+        let sortBy = $("#userSortBy").val() || "id";
         let sortOrder = $("#userSortOrder").val() || "asc";
         loadUserData(url, search, sortBy, sortOrder);
     });

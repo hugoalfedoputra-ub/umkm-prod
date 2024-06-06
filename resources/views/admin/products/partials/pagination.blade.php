@@ -1,3 +1,3 @@
-   <div id="paginationLinks" class="flex justify-center">
+   <div id="productPaginationLinks" class="flex justify-center">
       {{ $products->links() }}
    </div>

@@ -40,7 +40,7 @@
                   ])
                </div>
 
-               <div id="paginationLinks" class="flex justify-center mt-8">
+               <div id="productPaginationLinks" class="flex justify-center mt-8">
                   {{ $products->links() }}
                </div>
             </div>
