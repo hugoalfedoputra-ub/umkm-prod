@@ -9,9 +9,10 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\ProductVariant;
-// use ArielMejiaDev\LarapexCharts\LarapexChart;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -34,7 +35,7 @@ class AdminController extends Controller
             try {
                 if ($sortRequest == 'kuantitas') {
                     $recentOrders = Order::with(['items'])
-                        ->select('orders.*', \DB::raw('SUM(order_items.quantity) as total_quantity'))
+                        ->select('orders.*', DB::raw('SUM(order_items.quantity) as total_quantity'))
                         ->join('order_items', 'orders.id', '=', 'order_items.order_id')
                         ->groupBy('orders.id')
                         ->orderBy('total_quantity', $sortDirection)
