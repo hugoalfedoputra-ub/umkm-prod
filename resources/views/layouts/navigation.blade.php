@@ -22,7 +22,7 @@
                @if (Auth::check() && Auth::user()->userrole == 'admin')
                   <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs(['admin.dashboard'])">{{ __('Dashboard Admin') }}</x-nav-link>
                   <x-nav-link :href="route('admin.products.products')" :active="request()->routeIs('admin.products.*')">{{ __('Products') }}</x-nav-link>
-                  <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')">{{ __('Users') }}</x-nav-link>
+                  <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users.*')">{{ __('Users') }}</x-nav-link>
                @else
                   <x-nav-link :href="route('home')" :active="request()->routeIs('home')">{{ __('Home') }}</x-nav-link>
                   <x-nav-link :href="route('products.index')" :active="request()->routeIs(['products.index', 'products.show', 'search', 'filter'])">{{ __('Product') }}</x-nav-link>

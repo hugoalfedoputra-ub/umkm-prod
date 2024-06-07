@@ -57,7 +57,7 @@ Route::middleware(['auth', 'admin', 'capre'])->group(function () {
     Route::get('/admin/products/add/v2', [AdminController::class, 'createProduct'])->name('admin.products.add');
     Route::post('/admin/products/add/save', [AdminController::class, 'storeProduct_v2']);
 
-    Route::get('/admin/get-recent-orders', [AdminController::class, 'getRecentOrders'])->name('admin.getRecentOrders');
+    Route::get('/admin-dashboard/get-recent-orders', [AdminController::class, 'getRecentOrders'])->name('admin.getRecentOrders');
 
     Route::get('/admin/orders/update/{id}', [AdminController::class, 'showOrders'])->name('admin.orders.update');
     Route::post('/admin/orders/update/save/{id}', [AdminController::class, 'updateOrders'])->name('admin.orders.update');

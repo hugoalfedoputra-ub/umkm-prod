@@ -31,16 +31,6 @@ $(document).ready(function () {
         loadProductData();
     }
 
-    // Handle pagination click
-    $(document).on("click", "#productPaginationLinks a", function (e) {
-        e.preventDefault();
-        let url = $(this).attr("href");
-        let search = $("#productSearchInput").val() || "";
-        let sortBy = $("#productSortBy").val() || "id";
-        let sortOrder = $("#productSortOrder").val() || "asc";
-        loadProductData(url, search, sortBy, sortOrder);
-    });
-
     // Handle search and sort
     $("#productSearchBtn").on("click", function () {
         let search = $("#productSearchInput").val() || "";

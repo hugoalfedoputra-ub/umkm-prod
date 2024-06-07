@@ -31,16 +31,6 @@ $(document).ready(function () {
         loadUserData();
     }
 
-    // Handle pagination click
-    $(document).on("click", "#userPaginationLinks a", function (e) {
-        e.preventDefault();
-        let url = $(this).attr("href");
-        let search = $("#userSearchInput").val() || "";
-        let sortBy = $("#userSortBy").val() || "id";
-        let sortOrder = $("#userSortOrder").val() || "asc";
-        loadUserData(url, search, sortBy, sortOrder);
-    });
-
     // Handle search and sort
     $("#userSearchBtn").on("click", function () {
         let search = $("#userSearchInput").val() || "";

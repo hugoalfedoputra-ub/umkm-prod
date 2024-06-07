@@ -18,8 +18,8 @@ class AdminController extends Controller
 {
     private $columnCommands = [
         'waktu_order' => 'created_at',
-        'kuantitas' => 'quantity',
         'status' => 'status',
+        'nomor_id' => 'id',
     ];
 
     public function dashboard(Request $request)
@@ -43,7 +43,6 @@ class AdminController extends Controller
 
         return view('admin.dashboard', compact('product', 'user', 'recentOrders', 'productCount', 'userCount', 'orderCount', 'netSales', 'chart', 'months', 'chartData'));
     }
-
     public function getRecentOrders(Request $request)
     {
         $sortRequest = $request->get('sort', 'waktu_order');
@@ -73,15 +72,15 @@ class AdminController extends Controller
 
         if ($sortRequest === 'kuantitas') {
             return Order::with(['items'])
-                ->select('orders.*', \DB::raw('SUM(order_items.quantity) as total_quantity'))
+                ->select('orders.*', DB::raw('SUM(order_items.quantity) as total_quantity'))
                 ->join('order_items', 'orders.id', '=', 'order_items.order_id')
                 ->groupBy('orders.id')
                 ->orderBy('total_quantity', $sortDirection)
                 ->paginate(6);
         } else {
-            return Order::with(['items' => function ($query) use ($sortRequest, $sortDirection) {
-                $query->orderBy($this->columnCommands[$sortRequest], $sortDirection);
-            }])->paginate(6);
+            return Order::with(['items'])
+                ->orderBy($this->columnCommands[$sortRequest], $sortDirection)
+                ->paginate(6);
         }
     }
 

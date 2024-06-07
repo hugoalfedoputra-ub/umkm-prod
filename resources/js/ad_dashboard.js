@@ -64,25 +64,7 @@ $(document).ready(function () {
         fetchRecentOrders();
     });
 
-    // Event listener untuk pagination
-    $(document).on("click", "#recent-orders-pagination a", function (e) {
-        e.preventDefault();
-        var url = $(this).attr("href");
-        fetchRecentOrders(url);
-        if ($(window).width() > 768) {
-            $("html, body").animate(
-                { scrollTop: $(document).height() - $(window).height() - 160 },
-                "slow"
-            );
-        } else {
-            $("html, body").animate(
-                { scrollTop: $(document).height() - $(window).height() - 870 },
-                "slow"
-            );
-        }
-    });
-
-    function fetchRecentOrders(url = "/admin/get-recent-orders") {
+    function fetchRecentOrders(url = "/admin-dashboard/get-recent-orders") {
         var formData = $("#sort-form").serialize();
         $.ajax({
             url: url,
@@ -90,10 +72,39 @@ $(document).ready(function () {
             data: formData,
             success: function (response) {
                 $("#recent-orders-container").html(response.html);
+                setupPaginationLinks();
             },
             error: function (xhr) {
                 console.error("Error fetching recent orders:", xhr);
             },
         });
     }
+
+    function setupPaginationLinks() {
+        $("#recent-orders-pagination a").on("click", function (e) {
+            e.preventDefault();
+            var url = $(this).attr("href");
+            fetchRecentOrders(url);
+            if ($(window).width() > 768) {
+                $("html, body").animate(
+                    {
+                        scrollTop:
+                            $(document).height() - $(window).height() - 160,
+                    },
+                    "slow"
+                );
+            } else {
+                $("html, body").animate(
+                    {
+                        scrollTop:
+                            $(document).height() - $(window).height() - 870,
+                    },
+                    "slow"
+                );
+            }
+        });
+    }
+
+    // Initial setup for pagination links
+    setupPaginationLinks();
 });
