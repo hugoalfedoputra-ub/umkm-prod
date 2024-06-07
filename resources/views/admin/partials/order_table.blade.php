@@ -16,21 +16,11 @@
                   <span
                      style="color:
                      @switch($order->status)
-                         @case('pending')
-                             yellow;
-                             @break
-                         @case('diproses')
-                             brown;
-                             @break
-                         @case('dalam perjalanan')
-                             blue;
-                             @break
-                         @case('selesai')
-                             green;
-                             @break
-                         @case('canceled')
-                             red;
-                             @break
+                        @case('pending') yellow; @break
+                        @case('diproses') brown; @break
+                        @case('dalam perjalanan') blue; @break
+                        @case('selesai') green; @break
+                        @case('canceled') red; @break
                      @endswitch
                   ">{{ $order->status }}</span>
                </td>
@@ -55,3 +45,6 @@
       </div>
    </div>
 @endforeach
+<div class="flex justify-center" id="recent-orders-pagination">
+   {{ $recentOrders->appends(request()->except('page'))->links() }}
+</div>

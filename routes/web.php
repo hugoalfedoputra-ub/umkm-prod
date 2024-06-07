@@ -45,6 +45,8 @@ Route::middleware(['auth', 'capre'])->group(function () {
 Route::middleware(['auth', 'admin', 'capre'])->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
+    Route::get('/admin/get-chart-data', [AdminController::class, 'getChartData'])->name('admin.getChartData');
+
     Route::get('/admin/products/v2', [AdminController::class, 'products_v2'])->name('admin.products.products');
     Route::get('/admin/products/table', [AdminController::class, 'productTable'])->name('admin.products.table');
     Route::get('/admin/products/create', [AdminController::class, 'createProduct'])->name('admin.products.create');
@@ -54,6 +56,8 @@ Route::middleware(['auth', 'admin', 'capre'])->group(function () {
 
     Route::get('/admin/products/add/v2', [AdminController::class, 'createProduct'])->name('admin.products.add');
     Route::post('/admin/products/add/save', [AdminController::class, 'storeProduct_v2']);
+
+    Route::get('/admin/get-recent-orders', [AdminController::class, 'getRecentOrders'])->name('admin.getRecentOrders');
 
     Route::get('/admin/orders/update/{id}', [AdminController::class, 'showOrders'])->name('admin.orders.update');
     Route::post('/admin/orders/update/save/{id}', [AdminController::class, 'updateOrders'])->name('admin.orders.update');
