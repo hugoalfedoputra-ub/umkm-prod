@@ -71,8 +71,6 @@
                            <option value="harga" {{ request('sort') == 'harga' ? 'selected' : '' }}>Harga total
                               pesanan
                            </option>
-                           <option value="nama_produk" {{ request('sort') == 'nama_produk' ? 'selected' : '' }}>Nama
-                              produk</option>
                         </select>
                         <select name="direction" class="bg-beige text-brown p-2 rounded-lg w-32">
                            <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>desc</option>
