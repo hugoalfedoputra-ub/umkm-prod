@@ -24,6 +24,7 @@
                            <option value="id">Id</option>
                            <option value="name">Nama</option>
                            <option value="email">Email</option>
+                           <option value="userrole">Role</option>
                         </select>
                         <select id="userSortOrder" class="border rounded w-full mr-2 sm:mb-0">
                            <option value="asc">Asc</option>

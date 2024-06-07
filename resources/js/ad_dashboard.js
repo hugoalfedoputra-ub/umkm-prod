@@ -79,32 +79,4 @@ $(document).ready(function () {
             },
         });
     }
-
-    function setupPaginationLinks() {
-        $("#recent-orders-pagination a").on("click", function (e) {
-            e.preventDefault();
-            var url = $(this).attr("href");
-            fetchRecentOrders(url);
-            if ($(window).width() > 768) {
-                $("html, body").animate(
-                    {
-                        scrollTop:
-                            $(document).height() - $(window).height() - 160,
-                    },
-                    "slow"
-                );
-            } else {
-                $("html, body").animate(
-                    {
-                        scrollTop:
-                            $(document).height() - $(window).height() - 870,
-                    },
-                    "slow"
-                );
-            }
-        });
-    }
-
-    // Initial setup for pagination links
-    setupPaginationLinks();
 });
