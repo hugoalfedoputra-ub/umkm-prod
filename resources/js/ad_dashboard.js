@@ -7,7 +7,6 @@ $(document).ready(function () {
             fetchChartData(chartType);
         });
 
-    // Memuat data chart default saat halaman dimuat
     if (window.location.pathname.includes("admin-dashboard")) {
         fetchChartData(
             document.querySelector('select[name="chart_type"]').value || "sales"
@@ -19,7 +18,7 @@ $(document).ready(function () {
         fetch(`/admin/get-chart-data?chart_type=${chartType}`)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data); // Tambahkan log ini
+                console.log(data);
                 updateChart(data.months, data.chartData, chartType);
             })
             .catch((error) =>
@@ -70,10 +69,17 @@ $(document).ready(function () {
         e.preventDefault();
         var url = $(this).attr("href");
         fetchRecentOrders(url);
-        $("html, body").animate(
-            { scrollTop: $(document).height() - $(window).height() - 110 },
-            "slow"
-        );
+        if ($(window).width() > 768) {
+            $("html, body").animate(
+                { scrollTop: $(document).height() - $(window).height() - 160 },
+                "slow"
+            );
+        } else {
+            $("html, body").animate(
+                { scrollTop: $(document).height() - $(window).height() - 870 },
+                "slow"
+            );
+        }
     });
 
     function fetchRecentOrders(url = "/admin/get-recent-orders") {

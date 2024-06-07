@@ -16,10 +16,10 @@
                      x-on:click.prevent="$dispatch('open-modal', 'user-modal')">Tambah
                      Pengguna</button>
 
-                  <div class="flex flex-col justify-between lg:flex-row text-black">
-                     <input type="text" id="userSearchInput" class="border rounded p-2 mr-2 mb-2 lg:mb-0"
+                  <div class="flex flex-col justify-between md:flex-row text-black">
+                     <input type="text" id="userSearchInput" class="border rounded p-2 mr-2 mb-2 md:mb-0"
                         placeholder="Cari pengguna...">
-                     <div class="flex flex-row justify-between mb-2 lg:mb-0">
+                     <div class="flex flex-row justify-between mb-2 md:mb-0">
                         <select id="userSortBy" class="border rounded w-full mr-2 sm:mb-0">
                            <option value="id">Id</option>
                            <option value="name">Nama</option>
@@ -61,6 +61,6 @@
             </div>
             @include('admin.users.partials.pagination', compact('users'))
          </div>
-         @include('admin.users.create')
       </section>
+      @include('admin.users.create')
    </x-app-layout>

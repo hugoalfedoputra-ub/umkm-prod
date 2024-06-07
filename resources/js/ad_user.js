@@ -87,6 +87,12 @@ $(document).ready(function () {
     $(document).on("click", ".editUserBtn", function () {
         let id = $(this).data("id");
         $.get(`/admin/users/edit/${id}`, function (data) {
+            document.getElementById("userModalTitle").innerText = "Edit User";
+            document.getElementById("nameField").style.display = "none";
+            document.getElementById("emailField").style.display = "none";
+            document.getElementById("passwordField").style.display = "none";
+            document.getElementById("passwordConfirmationField").style.display =
+                "none";
             $("#userModalTitle").text("Edit Pengguna");
             $("#userId").val(data.id);
             $("#name").val(data.name);
@@ -94,7 +100,6 @@ $(document).ready(function () {
             $("#userrole").val(data.userrole);
             $("#password").val("");
             $("#password_confirmation").val("");
-            $("#userModal").removeClass("hidden");
         });
     });
 

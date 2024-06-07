@@ -47,30 +47,38 @@
                @include('admin.partials.chart')
             </div>
 
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-col sm:flex-row justify-between">
                <h2 class="text-2xl text-black font-bold mb-4">Pesanan Terbaru</h2>
                <div class="flex justify-center">
                   <form id="sort-form" action="{{ route('admin.dashboard') }}" method="GET"
-                     class="flex flex-row gap-4 flex-shrink-0 mb-4 flex-wrap items-center">
+                     class="flex flex-col md:flex-row gap-4 flex-shrink-0 mb-4 flex-wrap items-center">
+
                      <input type="text" name="search" placeholder="Cari..."
-                        class="bg-beige text-brown p-2 rounded-lg md:text-sm" value="{{ request('search') }}">
-                     <select name="sort" class="bg-beige text-brown p-2 rounded-lg md:text-sm">
-                        <option value="waktu_order" {{ request('sort') == 'waktu_order' ? 'selected' : '' }}>Waktu order
-                        </option>
-                        <option value="nomor_id" {{ request('sort') == 'nomor_id' ? 'selected' : '' }}>Nomor ID</option>
-                        <option value="status" {{ request('sort') == 'status' ? 'selected' : '' }}>Status pesanan
-                        </option>
-                        <option value="kuantitas" {{ request('sort') == 'kuantitas' ? 'selected' : '' }}>Kuantitas
-                           pesanan</option>
-                        <option value="harga" {{ request('sort') == 'harga' ? 'selected' : '' }}>Harga total pesanan
-                        </option>
-                        <option value="nama_produk" {{ request('sort') == 'nama_produk' ? 'selected' : '' }}>Nama
-                           produk</option>
-                     </select>
-                     <select name="direction" class="bg-beige text-brown p-2 rounded-lg lg:w-56 w-32">
-                        <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>desc</option>
-                        <option value="asc" {{ request('direction') == 'asc' ? 'selected' : '' }}>asc</option>
-                     </select>
+                        class="w-full md:w-32 bg-beige text-brown p-2 rounded-lg md:text-sm"
+                        value="{{ request('search') }}">
+
+                     <div class="flex flex-row gap-4 flex-shrink-0 flex-wrap items-center">
+                        <select name="sort" class="bg-beige text-brown p-2 rounded-lg md:text-sm">
+                           <option value="waktu_order" {{ request('sort') == 'waktu_order' ? 'selected' : '' }}>Waktu
+                              order
+                           </option>
+                           <option value="nomor_id" {{ request('sort') == 'nomor_id' ? 'selected' : '' }}>Nomor ID
+                           </option>
+                           <option value="status" {{ request('sort') == 'status' ? 'selected' : '' }}>Status pesanan
+                           </option>
+                           <option value="kuantitas" {{ request('sort') == 'kuantitas' ? 'selected' : '' }}>Kuantitas
+                              pesanan</option>
+                           <option value="harga" {{ request('sort') == 'harga' ? 'selected' : '' }}>Harga total
+                              pesanan
+                           </option>
+                           <option value="nama_produk" {{ request('sort') == 'nama_produk' ? 'selected' : '' }}>Nama
+                              produk</option>
+                        </select>
+                        <select name="direction" class="bg-beige text-brown p-2 rounded-lg w-32">
+                           <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>desc</option>
+                           <option value="asc" {{ request('direction') == 'asc' ? 'selected' : '' }}>asc</option>
+                        </select>
+                     </div>
                      <button type="submit"
                         class="bg-brown py-2 px-3 rounded-lg shadow-md rounded-r-md hover:bg-brownhv transition-colors duration-300">Urutkan</button>
                   </form>
