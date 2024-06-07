@@ -59,12 +59,9 @@ class AdminController extends Controller
             ->orderBy($this->columnCommands[$sortRequest] ?? 'created_at', $sortDirection)
             ->paginate(6);
 
-        if ($request->ajax()) {
-            $view = view('admin.partials.order_table', compact('recentOrders'))->render();
-            return response()->json(['html' => $view]);
-        }
+        $view = view('admin.partials.order_table', compact('recentOrders'))->render();
 
-        return view('admin.dashboard', compact('recentOrders'));
+        return response()->json(['html' => $view]);
     }
 
     private function getSortedOrders($sortRequest, $sortDirection)

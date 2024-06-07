@@ -11,7 +11,7 @@ $(document).ready(function () {
         fetchChartData(
             document.querySelector('select[name="chart_type"]').value || "sales"
         );
-        fetchRecentOrders();
+        //   fetchRecentOrders();
     }
 
     function fetchChartData(chartType) {
@@ -59,24 +59,23 @@ $(document).ready(function () {
     }
 
     // Event listener untuk form sorting dan searching
-    $("#sort-form").on("submit", function (e) {
-        e.preventDefault();
-        fetchRecentOrders();
-    });
+    //  $("#sort-form").on("submit", function (e) {
+    //      e.preventDefault();
+    //      fetchRecentOrders();
+    //  });
 
-    function fetchRecentOrders(url = "/admin-dashboard/get-recent-orders") {
-        var formData = $("#sort-form").serialize();
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: formData,
-            success: function (response) {
-                $("#recent-orders-container").html(response.html);
-                setupPaginationLinks();
-            },
-            error: function (xhr) {
-                console.error("Error fetching recent orders:", xhr);
-            },
-        });
-    }
+    //  function fetchRecentOrders(url = "/admin-dashboard/get-recent-orders") {
+    //      var formData = $("#sort-form").serialize();
+    //      $.ajax({
+    //          url: url,
+    //          type: "GET",
+    //          data: formData,
+    //          success: function (response) {
+    //              $("#recent-orders-container").html(response.html);
+    //          },
+    //          error: function (xhr) {
+    //              console.error("Error fetching recent orders:", xhr);
+    //          },
+    //      });
+    //  }
 });

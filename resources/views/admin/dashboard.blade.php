@@ -6,7 +6,7 @@
    <section class="bg-whitebg dashboard-ad md:container md:mx-auto py-8 lg:px-16" data-aos="fade-in"
       data-aos-easing="linear" data-aos-duration="600" data-aos-delay="500">
 
-      <!-- The Sidebar Layout -->
+      <!-- Sidebar -->
       {{-- @include('layouts.sidebar') --}}
 
       <!-- Main Content -->
@@ -71,6 +71,8 @@
                            <option value="harga" {{ request('sort') == 'harga' ? 'selected' : '' }}>Harga total
                               pesanan
                            </option>
+                           <option value="nama_produk" {{ request('sort') == 'nama_produk' ? 'selected' : '' }}>Nama
+                              produk</option>
                         </select>
                         <select name="direction" class="bg-beige text-brown p-2 rounded-lg w-32">
                            <option value="desc" {{ request('direction') == 'desc' ? 'selected' : '' }}>desc</option>
@@ -87,6 +89,7 @@
             <div id="recent-orders-container" class="flex flex-wrap -mx-2">
                @include('admin.partials.order_table', compact('recentOrders'))
             </div>
+
          </div>
       </main>
    </section>

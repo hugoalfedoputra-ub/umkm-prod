@@ -11,20 +11,21 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ReviewController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-Route::get('/filter', [ProductController::class, 'filter'])->name('filter');
-Route::get('/live-search', [ProductController::class, 'liveSearch'])->name('liveSearch');
-
-Route::get('/about', function () {
-    return view('about.index');
-})->name('about.index');
-Route::get('/contact', function () {
-    return view('contact.index');
-})->name('contact.index');
 
 Route::middleware(['auth', 'capre'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/filter', [ProductController::class, 'filter'])->name('filter');
+    Route::get('/live-search', [ProductController::class, 'liveSearch'])->name('liveSearch');
+
+    Route::get('/about', function () {
+        return view('about.index');
+    })->name('about.index');
+    Route::get('/contact', function () {
+        return view('contact.index');
+    })->name('contact.index');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
