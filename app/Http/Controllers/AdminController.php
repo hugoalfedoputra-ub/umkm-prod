@@ -265,7 +265,7 @@ class AdminController extends Controller
 
         // Store the file in the public storage folder with the custom name
         if (App::environment('production')) {
-            $request->file('imageFile')->store('public/images');
+            $request->file('imageFile')->store('storage/images');
         } else {
             $request->file('imageFile')->move($storagePath, $fileName);
         }
@@ -418,7 +418,7 @@ class AdminController extends Controller
 
             // Store the file in the public storage folder with the custom name
             if (App::environment('production')) {
-                $request->file('imageFile')->store('public/images');
+                $request->file('imageFile')->store('storage/images');
             } else {
                 $request->file('imageFile')->move($storagePath, $fileName);
             }
