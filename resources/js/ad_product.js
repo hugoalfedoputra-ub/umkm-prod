@@ -96,8 +96,8 @@ $(document).ready(function () {
         });
     });
 
-    // Delete Product
-    $(".deleteProductBtn").on("click", function () {
+    // Delete Product using event delegation
+    $(document).on("click", ".deleteProductBtn", function () {
         if (!confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
             return;
         }
@@ -111,7 +111,7 @@ $(document).ready(function () {
                 _token: $('meta[name="csrf-token"]').attr("content"),
             },
             success: function (response) {
-                location.reload();
+                loadProductData();
             },
             error: function (xhr) {
                 alert("Terjadi kesalahan. Silakan coba lagi.");
