@@ -265,17 +265,27 @@ class AdminController extends Controller
 
         // Store the file in the public storage folder with the custom name
         if (App::environment('production')) {
-            $request->file('imageFile')->store('storage/images');
+            $request->file('imageFile')->store('public/images');
+            $originalPath = $request->imageName;
+            // Replace 'storage/images/' with 'storage/app/public/images/'
+            $newPath = str_replace('storage/images/', 'storage/app/public/images/', $originalPath);
+
+            $product = new Product;
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->image = $newPath;
+            $product->save();
         } else {
             $request->file('imageFile')->move($storagePath, $fileName);
-        }
 
-        $product = new Product;
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->image = $request->imageName;
-        $product->save();
+            $product = new Product;
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->image = $request->imageName;
+            $product->save();
+        }
 
         $productVariant = new ProductVariant;
         $productVariant->product_id = $product->id;
@@ -418,7 +428,7 @@ class AdminController extends Controller
 
             // Store the file in the public storage folder with the custom name
             if (App::environment('production')) {
-                $request->file('imageFile')->store('storage/images');
+                $request->file('imageFile')->store('public/images');
             } else {
                 $request->file('imageFile')->move($storagePath, $fileName);
             }
