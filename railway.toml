@@ -1,6 +1,6 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "npm run build && ls -l public"
+buildCommand = "npm run build && ls -l public && ls -l public/storage && ls -l public/storage/images"
 
 [deploy]
 runtime = "V2"
