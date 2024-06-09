@@ -13,6 +13,7 @@ use App\Models\ProductVariant;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\App;
 
 class AdminController extends Controller
 {
@@ -263,7 +264,11 @@ class AdminController extends Controller
         $fileName = $request->imageName;
 
         // Store the file in the public storage folder with the custom name
-        $request->file('imageFile')->move($storagePath, $fileName);
+        if (App::environment('production')) {
+            $request->file('imageFile')->store('public/images');
+        } else {
+            $request->file('imageFile')->move($storagePath, $fileName);
+        }
 
         $product = new Product;
         $product->name = $request->name;
@@ -395,8 +400,8 @@ class AdminController extends Controller
             'stock.*' => 'required|integer|min:0',
             'variant_id' => 'required|array',
             'variant_id.*' => 'required|integer',
-            'imageFile' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'imageName' => 'required|string',
+            'imageFile' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'imageName' => 'string',
         ]);
 
         if ($validator->fails()) {
@@ -405,19 +410,26 @@ class AdminController extends Controller
                 ->withInput();
         }
 
-        $storagePath = public_path('storage/images');
+        if ($request->imageName != null) {
+            $storagePath = public_path('storage/images');
 
-        // Generate a unique file name using "sepatu" + timestamp + original extension
-        $fileName = $request->imageName;
+            // Generate a unique file name using "sepatu" + timestamp + original extension
+            $fileName = $request->imageName;
 
-        // Store the file in the public storage folder with the custom name
-        $request->file('imageFile')->move($storagePath, $fileName);
+            // Store the file in the public storage folder with the custom name
+            if (App::environment('production')) {
+                $request->file('imageFile')->store('public/images');
+            } else {
+                $request->file('imageFile')->move($storagePath, $fileName);
+            }
+            // Update image product details if image is provided (optional)
+            $product->image = $fileName;
+        }
 
         // Update product details
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->image = $fileName;
 
         // Update each product variant's stock
         $variantIds = $request->variant_id;
